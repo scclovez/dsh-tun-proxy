@@ -16,7 +16,7 @@ DSH 内的独立 mihomo 客户端。
 - 连接：实时速率、流量趋势、连接列表、单独/全部断开。
 - 规则：运行规则、自定义前置规则。
 - 链式：2–8 跳 TCP 代理。
-- 系统：TUN、Windows 系统代理、DNS、IPv6、自动启动。
+- 系统：TUN、Windows 系统代理、DNS、IPv6、自动启动、关 DSH 时自动停代理（可选）。
 - 维护：日志、内核更新、本地备份与恢复。
 - 界面：继承 DSH 主题及玻璃配色。
 
@@ -29,6 +29,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1
 ~~~
 
 重启 DSH，在左侧打开“代理中心”。TUN 需要管理员权限。
+
+面板“概览 → 连接”里的 **“关 DSH 时关代理”** 开关（设置项 `stopOnExit`，默认关闭）：打开后，正常退出 DSH 或停用本插件时会停止内核；用任务管理器强杀 DSH 不会触发，那种情况内核会继续在后台跑（可用面板、`scripts/cli.mjs stop` 或 `taskkill /IM mihomo.exe /F` 停掉）。
 
 ## 测试
 
