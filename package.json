@@ -1,8 +1,8 @@
 {
   "name": "dsh-tun-proxy",
   "version": "0.3.0",
-  "private": true,
   "description": "DSH proxy center: global TUN, subscriptions, nodes, and multi-hop dialer-proxy chains",
+  "author": "scclovez",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scclovez/dsh-tun-proxy.git"
@@ -28,6 +28,7 @@
     "README.md",
     "README.en.md",
     "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
     "web",
     "test"
   ],

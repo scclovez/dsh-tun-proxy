@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 dsh-tun-proxy contributors
+Copyright (c) 2026 scclovez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,8 @@ SOFTWARE.
 
 ---
 
-This plugin downloads and runs third-party software at the user's request:
+The MIT license above covers this project's own source code only.
 
-- mihomo (https://github.com/MetaCubeX/mihomo) — GPL-3.0
-- wintun (https://www.wintun.net/) — WireGuard project, MIT-style license
-
-Neither is bundled with this repository; both are downloaded into the plugin's
-own state directory.
+No third-party binary is bundled with this package: the mihomo kernel and the
+Wintun DLL are downloaded at run time into the user's own state directory.
+Their licenses and notices are documented in THIRD_PARTY_NOTICES.md.
