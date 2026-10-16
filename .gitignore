@@ -1,0 +1,15 @@
+node_modules/
+acceptance/
+*.tgz
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+settings.json
+state.json
+subscriptions.json
+profiles/
+backups/
+.DS_Store
+Thumbs.db

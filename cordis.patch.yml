@@ -1,0 +1,14 @@
+# dsh-tun-proxy bundle patch.
+#
+# Inserts one Host plugin. The plugin's own `apply()` registers the tun_proxy_*
+# tools, same-origin HTTP routes under /tun-proxy/*, and the optional autostart.
+#
+# `autoStart` here is only the boot-time default for the very first run; the
+# effective value lives in <DSH_HOME>/tun-proxy/settings.json and is what the
+# tools read and write. `DSH_TUN_PROXY_HOME` overrides the state directory.
+
+- insert:
+    - id: dsh-tun-proxy
+      name: 'dsh-tun-proxy'
+      config:
+        autoStart: false

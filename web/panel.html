@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DSH 代理中心</title><style>html,body,#root{height:100%;margin:0}</style></head><body data-proxy-standalone><div id="root"></div><script type="module">
+import { mountPanel } from '/tun-proxy/panel.js'
+const previewTheme = new URLSearchParams(location.search).get('previewTheme')
+if (['light','dark'].includes(previewTheme)) document.body.dataset.previewTheme = previewTheme
+mountPanel(document.getElementById('root'), async (action, data = {}) => {
+  const response = await fetch('/tun-proxy/action', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...data, action }) })
+  const result = await response.json()
+  if (!response.ok || !result.ok) throw new Error(result.error || `HTTP ${response.status}`)
+  return result.result
+}, () => { location.href = '/' })
+</script></body></html>

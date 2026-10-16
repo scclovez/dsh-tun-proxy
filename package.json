@@ -1,0 +1,81 @@
+{
+  "name": "dsh-tun-proxy",
+  "version": "0.3.0",
+  "private": true,
+  "description": "DSH proxy center: global TUN, subscriptions, nodes, and multi-hop dialer-proxy chains",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scclovez/dsh-tun-proxy.git"
+  },
+  "homepage": "https://github.com/scclovez/dsh-tun-proxy#readme",
+  "bugs": {
+    "url": "https://github.com/scclovez/dsh-tun-proxy/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./client": "./lib/client.js"
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "web",
+    "test"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.2",
+    "@deepseek-ai/dsh-typert-protocol": ">=0.2.0-rc.2"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-typert-protocol": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify": "node scripts/verify.mjs",
+    "build": "node scripts/build-client.mjs"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "tun",
+    "mihomo",
+    "clash",
+    "proxy"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "yaml": "2.9.1"
+  }
+}
