@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs'
 const panelStyle = readFileSync(new URL('../lib/panel-style.js', import.meta.url), 'utf8').replace('export const PANEL_CSS', 'const PANEL_CSS')
 const select = readFileSync(new URL('../lib/select.js', import.meta.url), 'utf8').replace('export function enhanceSelects', 'function enhanceSelects')
-const panel = readFileSync(new URL('../lib/panel.js', import.meta.url), 'utf8').replace("import { PANEL_CSS } from './panel-style.js'", '').replace("import { enhanceSelects } from './select.js'", '').replace('export function mountPanel', 'function mountPanel')
+const panel = readFileSync(new URL('../lib/panel.js', import.meta.url), 'utf8').replace("import { PANEL_CSS } from './panel-style.js'", '').replace("import { enhanceSelects } from './select.js'", '').replace('export function createPanelLoader', 'function createPanelLoader').replace('export function mountPanel', 'function mountPanel')
 const client = `window.__ModuleLoader__.load({id:'dsh-tun-proxy',factory(require){
 const React=require('react');
 ${panelStyle}
