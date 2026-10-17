@@ -51,16 +51,19 @@
 | 真实 mihomo 多跳代理、坏配置与端口占用回滚 | 仅 loopback 的两层 SOCKS + HTTP 目标；通过，报告 `evidence/local-runtime.json` |
 | PowerShell 5.1 profile 安装/卸载 | 临时 manifest，验证 BOM、保留其他 bundle 与依赖；自动测试 |
 | 实际 DSH peer 与装载/释放 | DSH 0.2.1-rc.1（复核复跑）与 0.2.0-rc.2（早前）：真实 peer 导入、临时 profile 组合、插件 apply 与 dispose 均通过，见 `evidence/host.json`；没有修改实际桌面 profile |
+| 隔离宿主 + 真实 Chromium 的 GUI 验收 | DSH 0.2.1-rc.1 临时宿主装载真实插件：面板页与静态资源 200，Chromium 渲染概览/设置面板；经面板同源接口保存设置、安装 v1.19.32（ZIP/EXE/wintun 均校验）、启动（controller ready）、停止、卸载（purge）；真实系统代理注册表 before/after 一致。见 `evidence/gui.json`、`evidence/gui-panel.png`、`evidence/gui-panel-running.png` |
 | 干净依赖安装与打包 | 新建临时目录的 `npm ci --omit=dev --ignore-scripts --legacy-peer-deps` 成功，仅安装 yaml；`npm run build` 和 `npm pack --dry-run` 成功，包内无 EXE/DLL |
 
-2026-10-17 复跑：完整 `npm test` 为 83 项（82 通过、1 项真实内核测试因未设置环境变量默认跳过）；`npm run verify:local-runtime` 单独运行真实内核等 6 项全部通过；`npm run verify:downloads` 与 `npm run verify:supply-chain` 重新生成证据并通过。宿主验收可用 `npm run verify:host -- "D:\apply\DeepSeek Harness\DeepSeek Harness.exe"` 复现（换成本机安装路径），本次在 DSH 0.2.1-rc.1 上通过。脚本使用隔离的 DSH_HOME 和状态目录，不启用 TUN 或系统代理。
+2026-10-17 复跑：完整 `npm test` 为 83 项（82 通过、1 项真实内核测试因未设置环境变量默认跳过）；`npm run verify:local-runtime` 单独运行真实内核等 6 项全部通过；`npm run verify:downloads` 与 `npm run verify:supply-chain` 重新生成证据并通过。宿主验收可用 `npm run verify:host -- "D:\apply\DeepSeek Harness\DeepSeek Harness.exe"` 复现（换成本机安装路径），本次在 DSH 0.2.1-rc.1 上通过；`npm run verify:gui` 在隔离 DSH 0.2.1-rc.1 + 真实 Chromium 上完成面板渲染与安装/启动/停止/卸载。脚本使用隔离的 DSH_HOME 和状态目录，不启用 TUN 或系统代理。
 
 仍需在空闲/隔离 Windows 中补充的验收：
 
 1. 管理员与非管理员两种身份下的 TUN 启动和用户确认记录。
 2. 开启 TUN 前后、正常停止后、内核崩溃后、宿主强杀后的适配器与 IPv4/IPv6 路由差异。已有 `scripts/acceptance-tun.mjs`，会拒绝在已有活动 TUN 时运行；不能在正在依赖代理工作的系统上直接执行。
-3. 真实 Windows 系统代理注册表的 before/after（含 PAC/其他应用接管）及强杀恢复；目前的代理恢复证据为适配器测试。
-4. 完整 GUI 面板加载、设置保存、安装/启动/卸载结果及确切 DSH 版本。宿主脚本测试只覆盖报告列明的无 UI 生命周期，不代表 GUI 验收。
+3. 真实 Windows 系统代理注册表的 before/after（含 PAC/其他应用接管）及强杀恢复。GUI 验收只证明隔离运行没有改动真实注册表，代理恢复仍需真实注册表证据。
+4. 桌面侧栏（DSH 内嵌 UI）中面板的视觉确认：`npm run verify:gui` 已覆盖独立面板页的 Chromium 渲染与全部面板操作，但没有覆盖桌面侧栏内的内嵌渲染。
+
+已补齐：完整 GUI 面板加载、设置保存、安装/启动/卸载结果与确切 DSH 版本，见上表最后一行与 `evidence/gui.json`。
 
 早前检查时本机已有 FlClash / Meta Tunnel 处于 Up 状态；本次复跑时已无活动 TUN，但为避免中断正在使用的网络，仍未执行真实 TUN/系统代理切换与强杀测试。这项限制与代码测试通过分别记录。
 

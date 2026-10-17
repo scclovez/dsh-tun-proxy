@@ -70,6 +70,7 @@
     "verify:downloads": "node scripts/verify-downloads.mjs",
     "verify:local-runtime": "node scripts/verify-local-runtime.mjs",
     "verify:host": "node scripts/verify-host.mjs",
+    "verify:gui": "node scripts/verify-gui.mjs",
     "build": "node scripts/build-client.mjs"
   },
   "keywords": [

@@ -1,0 +1,211 @@
+{
+  "checkedAt": "2026-10-17T09:38:46.899Z",
+  "hostVersion": "0.2.1-rc.1",
+  "runnerNode": "v24.21.0",
+  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN",
+  "port": 17895,
+  "realSystemProxyModified": false,
+  "tunEnabled": false,
+  "checks": {
+    "hostMountedPlugin": true,
+    "panelAssets": true,
+    "initialState": true,
+    "settingsSaved": true,
+    "kernelInstalled": true,
+    "panelRendered": true,
+    "startedThroughPanelApi": true,
+    "runningPanelRendered": true,
+    "stopped": true,
+    "uninstalled": true,
+    "realSystemProxyUntouched": true
+  },
+  "details": {
+    "hostVersionOutput": "0.2.1-rc.1",
+    "serverPid": 32376,
+    "panel": {
+      "status": 200,
+      "bytes": 958,
+      "assets": {
+        "/tun-proxy/panel.js": {
+          "status": 200,
+          "type": "text/javascript; charset=utf-8",
+          "bytes": 29394
+        },
+        "/tun-proxy/panel-style.js": {
+          "status": 200,
+          "type": "text/javascript; charset=utf-8",
+          "bytes": 18134
+        },
+        "/tun-proxy/select.js": {
+          "status": 200,
+          "type": "text/javascript; charset=utf-8",
+          "bytes": 8083
+        }
+      }
+    },
+    "initialKernel": {
+      "installed": false,
+      "version": ""
+    },
+    "registryBefore": {
+      "enable": "0x0",
+      "server": "http=127.0.0.1:17890;https=127.0.0.1:17890",
+      "bypass": "<local>;localhost;127.*;[::1]",
+      "pac": null
+    },
+    "savedSettings": {
+      "mixedPort": 17892,
+      "controllerPort": 19092,
+      "tunEnable": false,
+      "systemProxy": false,
+      "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml"
+    },
+    "kernel": {
+      "version": "v1.19.32",
+      "sha256": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
+      "tag": "v1.19.32",
+      "wintunSha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
+      "bytes": 22525067,
+      "downloadUrl": "https://gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-windows-amd64-compatible-v1.19.32.zip"
+    },
+    "panelRender": {
+      "screenshot": "docs/evidence/gui-panel.png",
+      "bytes": 22872
+    },
+    "start": {
+      "running": true,
+      "controllerReady": true,
+      "controllerVersion": "v1.19.32",
+      "pid": 17784,
+      "mixedPort": 17892,
+      "startResult": {
+        "version": ""
+      }
+    },
+    "panelRenderRunning": {
+      "screenshot": "docs/evidence/gui-panel-running.png",
+      "bytes": 22923
+    },
+    "stop": {
+      "stopped": true,
+      "pid": 17784,
+      "adapterGone": true,
+      "status": {
+        "running": false,
+        "pid": null,
+        "kernel": {
+          "installed": true,
+          "version": "v1.19.32",
+          "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\mihomo.exe",
+          "managed": true,
+          "integrityError": "",
+          "sha256": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
+          "asset": "mihomo-windows-amd64-compatible-v1.19.32.zip",
+          "tag": "v1.19.32",
+          "verifiedAt": "2026-10-17T09:39:17.239Z",
+          "signatureSource": "pinned"
+        },
+        "wintun": {
+          "installed": true,
+          "sha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
+          "source": "download",
+          "verifiedAt": "2026-10-17T09:39:17.239Z"
+        },
+        "kernelDir": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state",
+        "controller": {
+          "port": 19092,
+          "ready": false,
+          "version": "",
+          "summary": null
+        },
+        "tun": {
+          "enabled": false,
+          "stack": "mixed",
+          "device": "dsh-tun",
+          "adapter": null,
+          "defaultRoutes": []
+        },
+        "elevation": {
+          "admin": true
+        },
+        "profile": {
+          "source": "file",
+          "detail": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml",
+          "subscriptionUpdatedAt": null,
+          "autoImport": false
+        },
+        "settings": {
+          "kernelVersion": "v1.19.32",
+          "kernelSha256": "",
+          "kernelPath": "",
+          "githubMirror": "",
+          "wintunPath": "",
+          "mixedPort": 17892,
+          "controllerPort": 19092,
+          "mode": "rule",
+          "profileId": "",
+          "selectedNode": "",
+          "systemProxy": false,
+          "customRules": [],
+          "testUrl": "https://www.gstatic.com/generate_204",
+          "testTimeout": 5000,
+          "chainEnabled": false,
+          "chain": [],
+          "manualProxies": [],
+          "tunStack": "mixed",
+          "tunDevice": "dsh-tun",
+          "tunEnable": false,
+          "dnsListen": "127.0.0.1:18531",
+          "dnsMode": "redir-host",
+          "subscriptionUrl": "",
+          "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml",
+          "autoImport": false,
+          "refreshOnStart": true,
+          "autoStart": false,
+          "stopOnExit": false,
+          "allowLan": false,
+          "strictRoute": false,
+          "mtu": 9000,
+          "logLevel": "debug",
+          "ipv6": false,
+          "dnsBootstrap": [
+            "223.5.5.5",
+            "119.29.29.29"
+          ],
+          "dnsServers": [
+            "https://doh.pub/dns-query",
+            "https://dns.alidns.com/dns-query"
+          ],
+          "dnsFallback": [],
+          "subscriptionConfigured": false
+        },
+        "warnings": [],
+        "pendingChanges": false,
+        "chain": {
+          "enabled": false,
+          "hops": [],
+          "transport": "TCP"
+        }
+      }
+    },
+    "uninstall": {
+      "purged": true,
+      "kernelInstalled": false,
+      "removed": {
+        "purged": true,
+        "removed": [
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\mihomo.exe",
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\wintun.dll"
+        ]
+      }
+    },
+    "registryAfter": {
+      "enable": "0x0",
+      "server": "http=127.0.0.1:17890;https=127.0.0.1:17890",
+      "bypass": "<local>;localhost;127.*;[::1]",
+      "pac": null
+    }
+  },
+  "durationMs": 61275,
+  "serverLogTail": "dsh web: http://127.0.0.1:17895/?token=<redacted>\n"
+}
