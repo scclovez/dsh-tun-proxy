@@ -4,6 +4,8 @@ Independent mihomo desktop controls inside DSH: subscriptions, proxies, live con
 
 Windows x64 · DSH ≥ 0.2.0-rc.2 · Node.js ≥ 22.19
 
+See [audit evidence](docs/AUDIT-EVIDENCE.md) for 0.3.1 download verification, dependency provenance, tested host versions, and remaining Windows acceptance checks.
+
 [![npm](https://img.shields.io/npm/v/dsh-tun-proxy?label=npm)](https://www.npmjs.com/package/dsh-tun-proxy)
 [![downloads](https://img.shields.io/npm/dm/dsh-tun-proxy)](https://www.npmjs.com/package/dsh-tun-proxy)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)

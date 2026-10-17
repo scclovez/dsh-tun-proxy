@@ -2,7 +2,7 @@
 #
 #   1. 先停掉内核（如果这个插件拉起来的）
 #   2. 从 package.json 移除 file: 依赖与 bundles 条目
-#   3. 跑 pnpm install
+#   3. 保留已安装副本以便恢复，重启 DSH 卸载面板
 #   4. 可选 -PurgeState：删除 <DSH_HOME>\tun-proxy 整个状态目录
 #
 #   powershell -ExecutionPolicy Bypass -File scripts/uninstall.ps1
@@ -32,6 +32,16 @@ if (-not $StateDir -or $StateDir.Trim() -eq '') {
 }
 
 Write-Host 'Stopping only the kernel owned by this plugin...'
+if ($PurgeState) {
+  $purgeTarget = [System.IO.Path]::GetFullPath($StateDir).TrimEnd('\')
+  $dshRoot = if ($env:DSH_HOME) { [System.IO.Path]::GetFullPath($env:DSH_HOME) } else { Join-Path $env:USERPROFILE '.dsh' }
+  foreach ($protectedRoot in @($env:USERPROFILE, $dshRoot, $ProfileDir, $PluginPath)) {
+    $protectedPath = [System.IO.Path]::GetFullPath($protectedRoot).TrimEnd('\')
+    if ($protectedPath.Equals($purgeTarget, [StringComparison]::OrdinalIgnoreCase) -or $protectedPath.StartsWith($purgeTarget + '\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe StateDir: refusing to purge a user, DSH, profile or source root.' }
+  }
+  if ($purgeTarget.StartsWith($dshRoot.TrimEnd('\') + '\', [StringComparison]::OrdinalIgnoreCase) -and -not $purgeTarget.Equals((Join-Path $dshRoot 'tun-proxy'), [StringComparison]::OrdinalIgnoreCase)) { throw 'Unsafe StateDir: refusing unrelated DSH data.' }
+  if ((Test-Path -LiteralPath $StateDir) -and ((Get-Item -LiteralPath $StateDir -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw 'Refusing to purge a reparse-point StateDir.' }
+}
 $cli = Join-Path $PluginPath 'scripts\cli.mjs'
 if ((Test-Path -LiteralPath (Join-Path $StateDir 'state.json')) -and (Test-Path -LiteralPath $cli)) {
   $previousStateDir = $env:DSH_TUN_PROXY_HOME

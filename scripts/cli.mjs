@@ -3,7 +3,7 @@
  * Useful before/without a DSH restart, and for scripting.
  *
  *   node scripts/cli.mjs status [--verbose]
- *   node scripts/cli.mjs install [--force] [--version v1.19.32]
+ *   node scripts/cli.mjs install [--force] [--version v1.19.32] [--sha256 <hex>]
  *   node scripts/cli.mjs start [--subscription <url>] [--profile <file>] [--dns-mode redir-host]
  *   node scripts/cli.mjs stop
  *   node scripts/cli.mjs config get|set [key=value ...]
@@ -56,6 +56,7 @@ try {
       const result = await service.install({
         force: has('--force'),
         version: flag('--version') ?? '',
+        sha256: flag('--sha256') ?? '',
         onProgress: (message) => console.error(`  ${message}`),
       })
       print({ kernel: result.kernel, wintun: result.wintun, geodata: result.geodata })

@@ -107,7 +107,8 @@ async function main() {
   if (!noInstall && !existsSync(service.paths.kernel) && kernelPath === '') {
     console.log('installing kernel …')
     const installed = await service.install({ onProgress: (message) => process.stdout.write(`\r  ${message}            `) })
-    console.log(`\r  kernel ${installed.kernel.version} (${installed.kernel.asset}, ${Math.round(installed.kernel.bytes / 1048576)} MiB), wintun via ${installed.wintun.source}`)
+    const sha = installed.kernel.verification?.sha256 ?? '(未校验)'
+    console.log(`\r  kernel ${installed.kernel.version} (${installed.kernel.asset}, ${Math.round(installed.kernel.bytes / 1048576)} MiB, sha256 ${sha}), wintun via ${installed.wintun.source}`)
   }
   else if (kernelPath !== '') {
     const installed = await service.install({})
@@ -115,6 +116,8 @@ async function main() {
   }
 
   check('kernel installed', existsSync(kernelPath || service.paths.kernel), await kernelVersion(kernelPath || service.paths.kernel))
+  const stateJson = existsSync(service.paths.stateFile) ? JSON.parse(readFileSync(service.paths.stateFile, 'utf8')) : {}
+  check('kernel install has verified SHA-256', !existsSync(service.paths.kernel) || typeof stateJson.kernelInstall?.sha256 === 'string' && stateJson.kernelInstall.sha256.length === 64, stateJson.kernelInstall?.sha256 ?? '(managed kernel installed without a recorded digest)')
   check('wintun.dll present', existsSync(service.paths.wintun), service.paths.wintun)
 
   const startResult = await service.start({ onProgress: (message) => process.stdout.write(`\r  ${message}            `) })

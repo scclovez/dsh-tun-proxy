@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-10-17T08:53:42.522Z",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "testDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-verified-download-8CXD21",
+  "checks": {
+    "upstreamDigest": true,
+    "verifiedDownloadInstallAndProbe": true
+  },
+  "release": {
+    "tag": "v1.19.32",
+    "source": "https://github.com/MetaCubeX/mihomo/releases/tag/v1.19.32",
+    "asset": "mihomo-windows-amd64-compatible-v1.19.32.zip",
+    "digest": "sha256:974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
+    "size": 22525067
+  },
+  "wintunTrustSource": "https://www.wintun.net/",
+  "kernel": {
+    "kernelPath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-verified-download-8CXD21\\bin\\mihomo.exe",
+    "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-verified-download-8CXD21\\bin\\mihomo.exe",
+    "version": "v1.19.32",
+    "tag": "v1.19.32",
+    "asset": "mihomo-windows-amd64-compatible-v1.19.32.zip",
+    "bytes": 22525067,
+    "extractor": "tar",
+    "downloadUrl": "https://gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download/v1.19.32/mihomo-windows-amd64-compatible-v1.19.32.zip",
+    "skipped": false,
+    "verification": {
+      "sha256": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
+      "size": 22525067,
+      "expected": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
+      "source": "pinned",
+      "verified": true,
+      "executableSha256": "04f8d7fc2b314771e1ecbf15951d59f0e1cb7914503c88cfb6972ff6a824e314",
+      "executableSize": 61276672,
+      "executableExpected": "04f8d7fc2b314771e1ecbf15951d59f0e1cb7914503c88cfb6972ff6a824e314"
+    }
+  },
+  "wintun": {
+    "wintunPath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-verified-download-8CXD21\\bin\\wintun.dll",
+    "source": "download",
+    "bytes": 427552,
+    "dll": {
+      "sha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
+      "size": 427552,
+      "expected": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
+      "verified": true
+    },
+    "verified": true,
+    "archive": {
+      "sha256": "07c256185d6ee3652e09fa55c0b673e2624b565e02c4b9091c79ca7d2f24ef51",
+      "size": 750540,
+      "expected": "07c256185d6ee3652e09fa55c0b673e2624b565e02c4b9091c79ca7d2f24ef51",
+      "url": "https://www.wintun.net/builds/wintun-0.14.1.zip"
+    }
+  }
+}

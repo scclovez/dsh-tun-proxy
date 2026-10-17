@@ -42,6 +42,14 @@ test('applyPatch keeps unrelated settings', () => {
   assert.equal(next.tunStack, base.tunStack)
 })
 
+test('pins the default kernel version and validates an explicit kernel SHA-256', () => {
+  const settings = normalizeSettings({})
+  assert.equal(settings.kernelVersion, 'v1.19.32')
+  assert.equal(settings.kernelSha256, '')
+  assert.equal(normalizeSettings({ kernelSha256: `sha256:${'A'.repeat(64)}` }).kernelSha256, 'a'.repeat(64))
+  assert.throws(() => normalizeSettings({ kernelSha256: 'not-a-digest' }), /kernelSha256/u)
+})
+
 test('subscription tokens are masked', () => {
   assert.equal(maskUrl('https://sub.example.com/api/v1/client/subscribe?token=abc'), 'https://sub.example.com/…')
   const view = publicSettings(normalizeSettings({ subscriptionUrl: 'https://sub.example.com/x?token=abc' }))

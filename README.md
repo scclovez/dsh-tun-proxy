@@ -2,6 +2,8 @@
 
 DSH 内的独立 mihomo 客户端。
 
+0.3.1 的下载校验、依赖来源及 Windows 验证范围见 [审查证据](docs/AUDIT-EVIDENCE.md)。商城复核尚待固定新提交和补齐文档中的验收项。
+
 [English](README.en.md) · Windows x64 · DSH ≥ 0.2.0-rc.2 · Node.js ≥ 22.19
 
 [![npm](https://img.shields.io/npm/v/dsh-tun-proxy?label=npm)](https://www.npmjs.com/package/dsh-tun-proxy)
@@ -31,7 +33,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install.ps1
 
 重启 DSH，在左侧打开“代理中心”。TUN 需要管理员权限。
 
-面板“概览 → 连接”里的 **“关 DSH 时关代理”** 开关（设置项 `stopOnExit`，默认关闭）：打开后，正常退出 DSH 或停用本插件时会停止内核；用任务管理器强杀 DSH 不会触发，那种情况内核会继续在后台跑（可用面板、`scripts/cli.mjs stop` 或 `taskkill /IM mihomo.exe /F` 停掉）。
+面板“概览 → 连接”里的 **“关 DSH 时关代理”** 开关（设置项 `stopOnExit`，默认关闭）：打开后，正常退出 DSH 或停用本插件时会停止内核并尝试恢复系统代理。强杀 DSH 无法触发退出钩子，内核可能继续在后台运行；可用面板或 `node scripts/cli.mjs stop` 停止本插件所属内核。
 
 ## 测试
 

@@ -1,8 +1,17 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { join } from 'node:path'
+import { homedir } from 'node:os'
+import { assertSafeStateHome } from '../lib/core/paths.js'
 
 import { candidateProfileRoots, dshHome, layout, pluginHome } from '../lib/core/paths.js'
+
+test('state roots cannot be the user home, DSH data, repository, or their ancestors', () => {
+  for (const directory of [homedir(), process.cwd(), join(homedir(), '.dsh'), join(homedir(), '.dsh', 'sessions')]) {
+    assert.throws(() => assertSafeStateHome(directory, {}), /Unsafe plugin state/)
+  }
+  assert.equal(assertSafeStateHome(join(homedir(), '.dsh', 'tun-proxy'), {}), join(homedir(), '.dsh', 'tun-proxy'))
+})
 
 test('DSH_HOME and DSH_TUN_PROXY_HOME override the state directory', () => {
   const env = { DSH_HOME: 'C:\\dsh', DSH_TUN_PROXY_HOME: 'D:\\state' }

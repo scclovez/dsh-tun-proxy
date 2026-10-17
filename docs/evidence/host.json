@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-17T09:18:08.696Z",
+  "hostVersion": "0.2.1-rc.1",
+  "runnerNode": "v24.21.0",
+  "hostNode": "v24.21.0",
+  "testDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-host-audit-oUd1m4",
+  "checks": {
+    "realPeerImports": true,
+    "composition": true,
+    "realPluginMounted": true,
+    "disposed": true
+  },
+  "help": "Usage: dsh --profile web [options]\n\nServe the DeepSeek Harness browser UI.\n\nOptions:\n  --host <host>                  bind address: one concrete IPv4 or IPv6 literal\n                                 of a local interface; wildcard addresses are\n                                 rejected\n  --no-open                      do not open the Web UI in the default browser\n  --port <port>                  listen port; pass 0 to let the OS pick a free\n                                 one\n  --public-url <url>             advertise this HTTP(S) root in the printed,\n                                 opened, runtime-context, and DSH_WEB_URL forms;\n                                 grants no trust\n  --trusted-host <authority...>  extra authority the /api browser-trust fence\n                                 accepts (host or host:port; repeatable)\n  --tls-cert <file>              PEM server certificate chain; requires\n                                 --tls-key\n  --tls-key <file>               unencrypted PEM private key; requires\n                                 --tls-cert\n  -h, --help                     show this help\n\nExamples:\n  dsh --profile web                          serve on the composed host and port\n  dsh --profile web --no-open                serve without opening a browser\n  dsh --profile web --port 8080              serve on another port\n  dsh --profile web --host 10.0.0.7          bind one local interface address\n  dsh --profile web --public-url https://app.example/ui/ --trusted-host app.example\n                                             advertise a prefix-stripping HTTPS proxy entry and admit its authority\n  dsh --profile web --tls-cert ./server-chain.pem --tls-key ./server-key.pem\n                                             serve HTTPS with an existing certificate and key",
+  "lifecycle": {
+    "loaded": true,
+    "disposed": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-10-17T09:16:49.538Z",
+  "node": "v24.21.0",
+  "kernelVersion": "v1.19.32",
+  "realKernel": true,
+  "tunEnabled": false,
+  "realSystemProxyModified": false,
+  "passed": true,
+  "output": "PROOF: entry → exit → HTTP target; bad node and occupied port kept original proxy operational\n✔ real mihomo sends traffic through every ordered hop and preserves service after invalid apply (16034.427ms)\n✔ Windows process ownership requires executable and config, including a reused/foreign PID (5377.6712ms)\n✔ system proxy restores the complete previous state including PAC (3.255ms)\n✔ system proxy does not overwrite another app that took ownership (0.3613ms)\n✔ synchronous shutdown restores PAC and bypass without awaiting the event loop (0.3639ms)\n✔ a failed restore retains durable recovery data for restart and uninstall (0.7712ms)\nℹ tests 6\nℹ suites 0\nℹ pass 6\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 17207.5018\n",
+  "error": null
+}

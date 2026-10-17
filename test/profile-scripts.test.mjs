@@ -41,6 +41,15 @@ test('PowerShell 5.1 install/uninstall preserve profile data and strict JSON com
     assert.equal(installed.dependencies['existing-plugin'], original.dependencies['existing-plugin'])
     assert.equal(installed.dependencies['dsh-tun-proxy'], 'file:' + pluginRoot.replaceAll('\\', '/'))
     assert.deepEqual(installed.dsh.profile.bundles, ['existing-plugin', 'dsh-tun-proxy'])
+    const beforeRefusal = readFileSync(manifest)
+    const refused = spawnSync('powershell.exe', [
+      '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass',
+      '-File', join(pluginRoot, 'scripts/uninstall.ps1'),
+      '-PluginPath', pluginRoot, '-ProfileDir', profile, '-StateDir', temp, '-PurgeState', '-SkipPnpm',
+    ], { encoding: 'utf8', timeout: 30000, windowsHide: true })
+    assert.notEqual(refused.status, 0, 'purge must reject an ancestor of the profile')
+    assert.match(refused.stderr, /Unsafe StateDir/)
+    assert.deepEqual(readFileSync(manifest), beforeRefusal, 'preflight refuses before editing the profile')
     const uninstalled = runScript('uninstall.ps1', ['-StateDir', join(temp, 'unused-state')])
     assert.deepEqual(uninstalled, original)
   }

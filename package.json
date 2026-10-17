@@ -1,6 +1,6 @@
 {
   "name": "dsh-tun-proxy",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "DSH proxy center: global TUN, subscriptions, nodes, and multi-hop dialer-proxy chains",
   "author": "scclovez",
   "repository": {
@@ -24,6 +24,7 @@
   "files": [
     "lib",
     "scripts",
+    "docs",
     "cordis.patch.yml",
     "README.md",
     "README.en.md",
@@ -65,6 +66,10 @@
   "scripts": {
     "test": "node --test",
     "verify": "node scripts/verify.mjs",
+    "verify:supply-chain": "node scripts/verify-supply-chain.mjs",
+    "verify:downloads": "node scripts/verify-downloads.mjs",
+    "verify:local-runtime": "node scripts/verify-local-runtime.mjs",
+    "verify:host": "node scripts/verify-host.mjs",
     "build": "node scripts/build-client.mjs"
   },
   "keywords": [
