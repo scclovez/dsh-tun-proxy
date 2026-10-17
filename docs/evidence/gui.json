@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-10-17T09:38:46.899Z",
-  "hostVersion": "0.2.1-rc.1",
+  "checkedAt": "2026-10-17T11:41:12.358Z",
+  "hostVersion": "0.2.1-rc.2",
   "runnerNode": "v24.21.0",
-  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN",
+  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW",
   "port": 17895,
   "realSystemProxyModified": false,
   "tunEnabled": false,
@@ -20,8 +20,8 @@
     "realSystemProxyUntouched": true
   },
   "details": {
-    "hostVersionOutput": "0.2.1-rc.1",
-    "serverPid": 32376,
+    "hostVersionOutput": "0.2.1-rc.2",
+    "serverPid": 23200,
     "panel": {
       "status": 200,
       "bytes": 958,
@@ -58,7 +58,7 @@
       "controllerPort": 19092,
       "tunEnable": false,
       "systemProxy": false,
-      "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml"
+      "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml"
     },
     "kernel": {
       "version": "v1.19.32",
@@ -76,7 +76,7 @@
       "running": true,
       "controllerReady": true,
       "controllerVersion": "v1.19.32",
-      "pid": 17784,
+      "pid": 34336,
       "mixedPort": 17892,
       "startResult": {
         "version": ""
@@ -88,7 +88,7 @@
     },
     "stop": {
       "stopped": true,
-      "pid": 17784,
+      "pid": 34336,
       "adapterGone": true,
       "status": {
         "running": false,
@@ -96,22 +96,22 @@
         "kernel": {
           "installed": true,
           "version": "v1.19.32",
-          "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\mihomo.exe",
+          "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\mihomo.exe",
           "managed": true,
           "integrityError": "",
           "sha256": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
           "asset": "mihomo-windows-amd64-compatible-v1.19.32.zip",
           "tag": "v1.19.32",
-          "verifiedAt": "2026-10-17T09:39:17.239Z",
+          "verifiedAt": "2026-10-17T11:41:36.720Z",
           "signatureSource": "pinned"
         },
         "wintun": {
           "installed": true,
           "sha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
           "source": "download",
-          "verifiedAt": "2026-10-17T09:39:17.239Z"
+          "verifiedAt": "2026-10-17T11:41:36.720Z"
         },
-        "kernelDir": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state",
+        "kernelDir": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state",
         "controller": {
           "port": 19092,
           "ready": false,
@@ -130,7 +130,7 @@
         },
         "profile": {
           "source": "file",
-          "detail": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml",
+          "detail": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml",
           "subscriptionUpdatedAt": null,
           "autoImport": false
         },
@@ -158,7 +158,7 @@
           "dnsListen": "127.0.0.1:18531",
           "dnsMode": "redir-host",
           "subscriptionUrl": "",
-          "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\acceptance-profile.yaml",
+          "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml",
           "autoImport": false,
           "refreshOnStart": true,
           "autoStart": false,
@@ -194,8 +194,8 @@
       "removed": {
         "purged": true,
         "removed": [
-          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\mihomo.exe",
-          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-0ULVPN\\state\\bin\\wintun.dll"
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\mihomo.exe",
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\wintun.dll"
         ]
       }
     },
@@ -206,6 +206,6 @@
       "pac": null
     }
   },
-  "durationMs": 61275,
+  "durationMs": 46089,
   "serverLogTail": "dsh web: http://127.0.0.1:17895/?token=<redacted>\n"
 }
