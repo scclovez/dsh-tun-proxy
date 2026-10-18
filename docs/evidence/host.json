@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-17T11:30:06.990Z",
+  "checkedAt": "2026-10-18T02:26:38.154Z",
   "hostVersion": "0.2.1-rc.2",
   "runnerNode": "v24.21.0",
   "hostNode": "v24.21.0",
-  "testDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-host-audit-Mur074",
+  "testDirectory": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-host-audit-3IQT7Z",
   "checks": {
     "realPeerImports": true,
     "composition": true,

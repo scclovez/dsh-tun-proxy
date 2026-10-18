@@ -46,6 +46,29 @@
         "@deepseek-ai/dsh-client-ui-layout",
         "@deepseek-ai/dsh-client-ui-sidebar"
       ]
+    },
+    "compatibility": {
+      "dsh": ">=0.2.0-rc.2",
+      "dshReleases": {
+        "0.2.1-rc.2": "compatible",
+        "0.2.1-rc.1": "unknown",
+        "0.2.1-alpha.5": "unknown"
+      },
+      "dshOperations": {
+        "0.2.1-rc.2": {
+          "install": "passed",
+          "start": "passed",
+          "uninstall": "passed",
+          "rollback": "unknown"
+        }
+      },
+      "node": ">=22.19.0",
+      "systems": [
+        "win32-x64"
+      ],
+      "profiles": [
+        "web"
+      ]
     }
   },
   "engines": {
@@ -71,6 +94,7 @@
     "verify:local-runtime": "node scripts/verify-local-runtime.mjs",
     "verify:host": "node scripts/verify-host.mjs",
     "verify:gui": "node scripts/verify-gui.mjs",
+    "verify:compatibility": "node scripts/verify-compatibility.mjs",
     "build": "node scripts/build-client.mjs"
   },
   "keywords": [

@@ -1,12 +1,13 @@
 {
-  "checkedAt": "2026-10-17T11:41:12.358Z",
+  "checkedAt": "2026-10-18T02:22:34.985Z",
   "hostVersion": "0.2.1-rc.2",
   "runnerNode": "v24.21.0",
-  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW",
+  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d",
   "port": 17895,
   "realSystemProxyModified": false,
   "tunEnabled": false,
   "checks": {
+    "authenticationEnforced": true,
     "hostMountedPlugin": true,
     "panelAssets": true,
     "initialState": true,
@@ -21,7 +22,20 @@
   },
   "details": {
     "hostVersionOutput": "0.2.1-rc.2",
-    "serverPid": 23200,
+    "serverPid": 36676,
+    "launch": {
+      "urlRedacted": "http://127.0.0.1:17895/?token=<redacted>"
+    },
+    "authBeforeLogin": {
+      "stateWithoutCredential": 401,
+      "actionWithoutCredential": 401,
+      "http10WithoutHost": "HTTP/1.1 403 Forbidden",
+      "crossOriginStatus": 403
+    },
+    "login": {
+      "status": 303,
+      "cookieName": "dsh-auth-Jb2XkmGHHXo8OgXQHyEMCId5FZETJs2wALTierdwsNk"
+    },
     "panel": {
       "status": 200,
       "bytes": 958,
@@ -29,7 +43,7 @@
         "/tun-proxy/panel.js": {
           "status": 200,
           "type": "text/javascript; charset=utf-8",
-          "bytes": 29394
+          "bytes": 33504
         },
         "/tun-proxy/panel-style.js": {
           "status": 200,
@@ -49,8 +63,8 @@
     },
     "registryBefore": {
       "enable": "0x0",
-      "server": "http=127.0.0.1:17890;https=127.0.0.1:17890",
-      "bypass": "<local>;localhost;127.*;[::1]",
+      "server": "127.0.0.1:7890",
+      "bypass": "*zhihu.com;*zhimg.com;*jd.com;100ime-iat-api.xfyun.cn;*360buyimg.com;localhost;*.local;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.2*;172.30.*;172.31.*;192.168.*;<local>",
       "pac": null
     },
     "savedSettings": {
@@ -58,7 +72,7 @@
       "controllerPort": 19092,
       "tunEnable": false,
       "systemProxy": false,
-      "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml"
+      "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\acceptance-profile.yaml"
     },
     "kernel": {
       "version": "v1.19.32",
@@ -70,13 +84,13 @@
     },
     "panelRender": {
       "screenshot": "docs/evidence/gui-panel.png",
-      "bytes": 22872
+      "bytes": 22949
     },
     "start": {
       "running": true,
       "controllerReady": true,
       "controllerVersion": "v1.19.32",
-      "pid": 34336,
+      "pid": 33084,
       "mixedPort": 17892,
       "startResult": {
         "version": ""
@@ -84,11 +98,11 @@
     },
     "panelRenderRunning": {
       "screenshot": "docs/evidence/gui-panel-running.png",
-      "bytes": 22923
+      "bytes": 23000
     },
     "stop": {
       "stopped": true,
-      "pid": 34336,
+      "pid": 33084,
       "adapterGone": true,
       "status": {
         "running": false,
@@ -96,22 +110,22 @@
         "kernel": {
           "installed": true,
           "version": "v1.19.32",
-          "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\mihomo.exe",
+          "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\state\\bin\\mihomo.exe",
           "managed": true,
           "integrityError": "",
           "sha256": "974a4d7ad69aed27aa2e8f91d61113573c14dadb14562c63e58effabf59816f0",
           "asset": "mihomo-windows-amd64-compatible-v1.19.32.zip",
           "tag": "v1.19.32",
-          "verifiedAt": "2026-10-17T11:41:36.720Z",
+          "verifiedAt": "2026-10-18T02:22:55.240Z",
           "signatureSource": "pinned"
         },
         "wintun": {
           "installed": true,
           "sha256": "e5da8447dc2c320edc0fc52fa01885c103de8c118481f683643cacc3220dafce",
           "source": "download",
-          "verifiedAt": "2026-10-17T11:41:36.720Z"
+          "verifiedAt": "2026-10-18T02:22:55.240Z"
         },
-        "kernelDir": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state",
+        "kernelDir": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\state",
         "controller": {
           "port": 19092,
           "ready": false,
@@ -130,7 +144,7 @@
         },
         "profile": {
           "source": "file",
-          "detail": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml",
+          "detail": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\acceptance-profile.yaml",
           "subscriptionUpdatedAt": null,
           "autoImport": false
         },
@@ -158,7 +172,7 @@
           "dnsListen": "127.0.0.1:18531",
           "dnsMode": "redir-host",
           "subscriptionUrl": "",
-          "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\acceptance-profile.yaml",
+          "profilePath": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\acceptance-profile.yaml",
           "autoImport": false,
           "refreshOnStart": true,
           "autoStart": false,
@@ -194,18 +208,18 @@
       "removed": {
         "purged": true,
         "removed": [
-          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\mihomo.exe",
-          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-ffDfCW\\state\\bin\\wintun.dll"
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\state\\bin\\mihomo.exe",
+          "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-gui-audit-fDgf7d\\state\\bin\\wintun.dll"
         ]
       }
     },
     "registryAfter": {
       "enable": "0x0",
-      "server": "http=127.0.0.1:17890;https=127.0.0.1:17890",
-      "bypass": "<local>;localhost;127.*;[::1]",
+      "server": "127.0.0.1:7890",
+      "bypass": "*zhihu.com;*zhimg.com;*jd.com;100ime-iat-api.xfyun.cn;*360buyimg.com;localhost;*.local;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.2*;172.30.*;172.31.*;192.168.*;<local>",
       "pac": null
     }
   },
-  "durationMs": 46089,
+  "durationMs": 136141,
   "serverLogTail": "dsh web: http://127.0.0.1:17895/?token=<redacted>\n"
 }

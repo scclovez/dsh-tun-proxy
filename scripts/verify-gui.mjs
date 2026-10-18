@@ -14,6 +14,7 @@
  */
 import { spawn, spawnSync } from 'node:child_process'
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import { connect } from 'node:net'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -33,6 +34,7 @@ const stateDir = join(staging, 'state')
 const pluginDir = join(staging, 'plugin')
 const port = 17895
 const base = `http://127.0.0.1:${port}`
+let sessionCookie = ''
 
 const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('DSH_')))
 Object.assign(env, {
@@ -59,24 +61,55 @@ function proxyRegistry() {
   return { enable: value('ProxyEnable'), server: value('ProxyServer'), bypass: value('ProxyOverride'), pac: value('AutoConfigURL') }
 }
 
-function chromeRun(url, { screenshot = '', dom = false } = {}) {
+function chromeRun(url, { screenshot = '', dom = false, profile = '' } = {}) {
   const args = [
     '--headless', '--disable-gpu', '--no-sandbox', '--no-first-run', '--no-default-browser-check',
-    '--hide-scrollbars', `--user-data-dir=${join(staging, `chrome-${Date.now()}`)}`,
+    '--hide-scrollbars', `--user-data-dir=${profile === '' ? join(staging, `chrome-${Date.now()}`) : profile}`,
     '--window-size=1440,1800', '--virtual-time-budget=6000',
   ]
   if (screenshot !== '') args.push(`--screenshot=${screenshot}`)
   if (dom) args.push('--dump-dom')
   args.push(url)
-  const result = spawnSync(chrome, args, { windowsHide: true, encoding: 'utf8', timeout: 180000, maxBuffer: 32 * 1024 * 1024 })
+  const result = spawnSync(chrome, args, { windowsHide: true, encoding: 'utf8', timeout: 90000, maxBuffer: 32 * 1024 * 1024 })
   if (screenshot !== '' && !existsSync(screenshot)) throw new Error(`headless Chrome wrote no screenshot: ${result.stderr ?? ''}`.slice(-4000))
   if (dom) return String(result.stdout ?? '')
   return ''
 }
 
 async function getPath(path) {
-  const response = await fetch(base + path)
+  const response = await fetch(base + path, { headers: authHeaders({ origin: base }) })
   return { status: response.status, type: response.headers.get('content-type') ?? '', body: await response.text() }
+}
+
+/** Every state/action call carries the browser-session cookie minted from the launch token. */
+function authHeaders(extra = {}) {
+  return sessionCookie === '' ? extra : { ...extra, cookie: sessionCookie }
+}
+
+/**
+ * Exchange the process launch token printed by `dsh web` for the signed
+ * browser-session cookie the Host Connection service requires.
+ */
+async function login(token) {
+  const response = await fetch(`${base}/?token=${encodeURIComponent(token)}`, { redirect: 'manual' })
+  const cookies = typeof response.headers.getSetCookie === 'function' ? response.headers.getSetCookie() : []
+  const minted = cookies.find((value) => value.startsWith('dsh-auth-'))
+  assert.ok(minted, `launch token must mint a browser-session cookie (got HTTP ${response.status})`)
+  sessionCookie = minted.split(';')[0]
+  return { status: response.status, cookieName: sessionCookie.split('=')[0] }
+}
+
+/** Raw socket request: proves a missing Host header (HTTP/1.0) is refused. */
+function rawRequest(line, headerLines = []) {
+  return new Promise((resolve, reject) => {
+    const socket = connect(port, '127.0.0.1')
+    let data = ''
+    socket.setTimeout(15000, () => { socket.destroy(); reject(new Error('raw request timed out')) })
+    socket.on('connect', () => socket.write([line, ...headerLines, '', ''].join('\r\n')))
+    socket.on('data', (chunk) => { data += String(chunk) })
+    socket.on('end', () => resolve(data))
+    socket.on('error', reject)
+  })
 }
 
 async function action(name, body = {}, { attempts = 3 } = {}) {
@@ -85,7 +118,7 @@ async function action(name, body = {}, { attempts = 3 } = {}) {
     try {
       const response = await fetch(`${base}/tun-proxy/action`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: authHeaders({ 'content-type': 'application/json', origin: base, 'sec-fetch-site': 'same-origin' }),
         body: JSON.stringify({ ...body, action: name }),
       })
       const json = await response.json()
@@ -129,6 +162,7 @@ const report = {
 
 let server = null
 const logs = []
+const rawLogs = []
 const startedAt = Date.now()
 const profileFile = join(staging, 'acceptance-profile.yaml')
 writeFileSync(profileFile, [
@@ -173,11 +207,50 @@ try {
   server.on('exit', (code, signal) => { logs.push(`SERVER EXIT code=${code} signal=${signal}`) })
   server.on('error', (error) => { logs.push(`SERVER ERROR ${error?.message ?? error}`) })
   const collect = (chunk) => {
-    logs.push(String(chunk).replace(/([?&]token=)[^\s&]+/gu, '$1<redacted>'))
+    const text = String(chunk)
+    rawLogs.push(text)
+    if (rawLogs.length > 400) rawLogs.shift()
+    logs.push(text.replace(/([?&]token=)[^\s&]+/gu, '$1<redacted>'))
     if (logs.length > 400) logs.shift()
   }
   server.stdout.on('data', collect)
   server.stderr.on('data', collect)
+
+  // AUTH001: the launch token is the only way in; mint the browser cookie first.
+  const announced = await (async () => {
+    const deadline = Date.now() + 90000
+    while (Date.now() < deadline) {
+      const match = /dsh web: (https?:\/\/[^\s]+\?token=([A-Za-z0-9_-]+))/u.exec(rawLogs.join(''))
+      if (match !== null) return { url: match[1], token: match[2] }
+      await new Promise((done) => setTimeout(done, 200))
+    }
+    throw new Error(`dsh web never printed a tokenised URL; log tail: ${logs.slice(-20).join('')}`)
+  })()
+  report.details.launch = { urlRedacted: announced.url.replace(/([?&]token=)[^\s&]+/gu, '$1<redacted>') }
+
+  const unauthorised = await fetch(`${base}/tun-proxy/state`)
+  const unauthorisedAction = await fetch(`${base}/tun-proxy/action`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', origin: base },
+    body: JSON.stringify({ action: 'stop' }),
+  })
+  const noHost = await rawRequest('GET /tun-proxy/state HTTP/1.0', [])
+  const crossOrigin = await fetch(`${base}/tun-proxy/state`, { headers: { origin: 'http://evil.example' } })
+  report.details.authBeforeLogin = {
+    stateWithoutCredential: unauthorised.status,
+    actionWithoutCredential: unauthorisedAction.status,
+    http10WithoutHost: noHost.split('\r\n')[0],
+    crossOriginStatus: crossOrigin.status,
+  }
+  assert.ok([401, 403].includes(unauthorised.status), 'state must require Host Connection authorization')
+  assert.ok([401, 403].includes(unauthorisedAction.status), 'action must require Host Connection authorization')
+  assert.match(noHost.split('\r\n')[0], /^HTTP\/1\.[01] 40[13]/u, 'HTTP/1.0 without Host must be refused')
+  assert.equal(crossOrigin.status, 403)
+
+  const session = await login(announced.token)
+  report.details.login = session
+  report.checks.authenticationEnforced = true
+
   await waitForState(() => true, { timeoutMs: 90000 })
   report.checks.hostMountedPlugin = true
 
@@ -233,7 +306,11 @@ try {
   report.details.kernel = { version: status.kernel.version, sha256: status.kernel.sha256, tag: status.kernel.tag, wintunSha256: status.wintun.sha256, bytes: installed.kernel.bytes, downloadUrl: installed.kernel.downloadUrl }
 
   const panelPng = join(evidenceDir, 'gui-panel.png')
-  const panelDom = chromeRun(`${base}/tun-proxy/panel`, { screenshot: panelPng, dom: true })
+  // The browser needs its own cookie, minted through the same token redirect.
+  // --dump-dom also makes headless Chrome exit after the redirect completes.
+  const chromeProfile = join(staging, 'chrome-auth')
+  chromeRun(`${base}/?token=${encodeURIComponent(announced.token)}`, { profile: chromeProfile, dom: true })
+  const panelDom = chromeRun(`${base}/tun-proxy/panel`, { screenshot: panelPng, dom: true, profile: chromeProfile })
   for (const marker of ['代理中心', '内核', 'v1.19.32']) assert.ok(panelDom.includes(marker), `panel DOM must contain ${marker}`)
   report.checks.panelRendered = true
   report.details.panelRender = { screenshot: 'docs/evidence/gui-panel.png', bytes: panelDom.length }
@@ -247,7 +324,7 @@ try {
   report.details.start = { running: status.running, controllerReady: status.controller.ready, controllerVersion: status.controller.version, pid: status.pid, mixedPort: 17892, startResult: { version: started.kernel?.version ?? '' } }
 
   const runningPng = join(evidenceDir, 'gui-panel-running.png')
-  const runningDom = chromeRun(`${base}/tun-proxy/panel`, { screenshot: runningPng, dom: true })
+  const runningDom = chromeRun(`${base}/tun-proxy/panel`, { screenshot: runningPng, dom: true, profile: chromeProfile })
   assert.ok(runningDom.includes('运行中'), 'running panel must show 运行中')
   assert.ok(runningDom.includes('v1.19.32'))
   report.checks.runningPanelRendered = true

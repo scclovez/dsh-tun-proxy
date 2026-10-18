@@ -1,0 +1,67 @@
+{
+  "checkedAt": "2026-10-18T02:26:24.716Z",
+  "hostVersion": "0.2.1-rc.2",
+  "declaredCompatible": [
+    "0.2.1-rc.2"
+  ],
+  "runnerNode": "v24.21.0",
+  "staging": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-compat-audit-zFcIHY",
+  "isolatedHome": true,
+  "realProfileTouched": false,
+  "checks": {
+    "installed": true,
+    "started": true,
+    "activated": true,
+    "uninstalled": true
+  },
+  "details": {
+    "hostVersionOutput": "0.2.1-rc.2",
+    "tarball": {
+      "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\dsh-compat-audit-zFcIHY\\dsh-tun-proxy-0.3.1.tgz",
+      "sha256": "41cb937f8fa8ed0791df9ae5940d2eb0b5d0f01dc6c62573224c5c429395cf6c",
+      "bytes": 220859,
+      "version": "0.3.1"
+    },
+    "gitHead": "f064bf7a08f7a1757b88e80988ab833e25925b73",
+    "installOutputTail": "Progress: resolved 0, reused 1, downloaded 0, added 0\nPackages are hard linked from the content-addressable store to the virtual store.\n  Content-addressable store is at: C:\\Users\\Administrator\\AppData\\Local\\pnpm\\store\\v11\n  Virtual store is at:             node_modules/.pnpm\nProgress: resolved 2, reused 1, downloaded 1, added 1\nPackages: +2\n++\nProgress: resolved 2, reused 1, downloaded 1, added 2, done\n\ndependencies:\n+ dsh-tun-proxy file:C:/Users/ADMINI~1/AppData/Local/Temp/dsh-compat-audit-zFcIHY/dsh-tun-proxy-0.3.1.tgz\n\nDone in 1.5s using pnpm v12.4.2",
+    "installed": {
+      "dependency": "file:C:/Users/ADMINI~1/AppData/Local/Temp/dsh-compat-audit-zFcIHY/dsh-tun-proxy-0.3.1.tgz",
+      "installedVersion": "0.3.1",
+      "bundles": {
+        "declared": [
+          "@deepseek-ai/dsh-base",
+          "@deepseek-ai/dsh-web-app",
+          "dsh-tun-proxy"
+        ],
+        "includesPlugin": true
+      }
+    },
+    "serverPid": 3024,
+    "launch": {
+      "urlRedacted": "http://127.0.0.1:17897/?token=<redacted>"
+    },
+    "activation": {
+      "panelStatus": 200,
+      "panelBytes": 958,
+      "stateWithoutCredential": 401,
+      "loginStatus": 303,
+      "stateWithCredential": 200,
+      "stateOk": true,
+      "kernelInstalled": false
+    },
+    "uninstallOutputTail": "Packages: -2\n--\n\ndependencies:\n- dsh-tun-proxy file:C:/Users/ADMINI~1/AppData/Local/Temp/dsh-compat-audit-zFcIHY/dsh-tun-proxy-0.3.1.tgz\n\nDone in 89ms using pnpm v12.4.2",
+    "afterRemove": {
+      "dependencyPresent": false,
+      "bundlePresent": false,
+      "nodeModulesPresent": false
+    },
+    "rollback": "unknown — an upgrade/rollback from an older installed version was not exercised",
+    "limitations": [
+      "Only the host and OS of this run are covered; other DSH versions and systems stay unknown.",
+      "TUN/virtual adapter activation was not enabled; the plugin mounted and answered in web mode only.",
+      "Rollback of an already-installed previous version is not verified."
+    ]
+  },
+  "serverLogTail": "dsh web: http://127.0.0.1:17897/?token=<redacted>\n",
+  "stagingRetained": true
+}
